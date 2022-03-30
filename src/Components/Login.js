@@ -31,19 +31,16 @@ export default function Login() {
                 localStorage.setItem('token', res.data.token)
                 console.log(res.data);
                 if(res.data.role === 'admin'){
-                    navigate('/adminHome')
+                    navigate('./adminHome/hotels')
                 } else {
-                    navigate('/managerHome')
+                    navigate('./managerHome')
                 }
             });
     };
     return (
         <div
-            className={
-                showModal.showLogin
-                    ? 'border-solid border-2 border-black w-1/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 '
-                    : 'hidden'
-            }
+            className=
+                 'border-solid border-2 border-black w-1/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 '
         >
             <div className='bg-black text-white text-xl t-josefin '>
                 <h2 className='py-4 px-6 t-josefin'>Back office</h2>
@@ -75,7 +72,7 @@ export default function Login() {
                         className='border-solid border-2 border-gray-600 block w-full py-2 px-2 mt-1'
                     />
                 </div>
-                <button className='btn bg-black text-white mt-10 mb-4 ml-auto mr-4 hover:bg-white hover:text-black  '>
+                <button className='block px-4 py-2 t-josefin uppercase bg-black text-white mt-10 mb-4 ml-auto mr-4 hover:bg-white hover:text-black  '>
                     Se connecter
                 </button>
                 <div>{error}</div>

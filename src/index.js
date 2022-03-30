@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './Context/AuthContext';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import modalsReducer from './Reducers/modalsReducer';

@@ -6,21 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 
 export default function Navbar() {
     const { currentUser } = useContext(AuthContext);
-    const showModal = useSelector(state => state)
 
-    const dispatch = useDispatch();
-
-    const toggleSignIn = () => {
-        dispatch({
-            type: 'TOGGLEIN',
-        });
-    };
-
-    const toggleSignUp = () => {
-        dispatch({
-            type: 'TOGGLEUP',
-        });
-    };
 
     return (
         <nav className='absolute top-0 inset-x-0 py-8 px-14 flex justify-center items center'>
@@ -36,16 +22,9 @@ export default function Navbar() {
                 ) : (
                     <div>
                         <button
-                            className={showModal.showLogin ?'mr-4 t-crimson text-xl underline underline-offset-8': 'mr-4 t-crimson text-xl'}
-                            onClick={toggleSignIn}
+                            className='mr-4 t-crimson text-xl underline underline-offset-8'
                         >
                             Connexion
-                        </button>
-                        <button
-                            className={showModal.showSignUp ?'mr-4 t-crimson text-xl underline underline-offset-8': 'mr-4 t-crimson text-xl'}
-                            onClick={toggleSignUp}
-                        >
-                            Inscription
                         </button>
                     </div>
                 )}
