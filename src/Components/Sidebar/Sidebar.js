@@ -13,12 +13,14 @@ export default function Sidebar(props) {
         localStorage.removeItem('token')
         localStorage.removeItem('currentUser')
     }
+    
     return (
-        <div className='absolute top-0 bottom-0 left-0 w-80 bg-gold flex flex-col justify-center px-6'>
+        <div className='fixed top-0 bottom-0 left-0 w-80 bg-gold flex flex-col justify-center px-6'>
             <nav className='mt-60'>
                 <p className='t-josefin text-xl'>Gérer les données:</p>
                 {props.links.map((link) => {
-                    return <Link to={`./${link}`} key={uuidv4()} className='block mt-3 text-xl t-josefin uppercase ml-2 hover:text-white' >{link}</Link>
+                    const urlLink = link.split(' ').join('')
+                    return <Link to={`./${urlLink}`} key={uuidv4()} className='block mt-3 text-xl t-josefin uppercase ml-2 hover:text-white' >{link}</Link>
                 })}
             </nav>
 

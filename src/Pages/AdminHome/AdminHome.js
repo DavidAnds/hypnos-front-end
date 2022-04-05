@@ -24,7 +24,7 @@ export default function AdminHome() {
 
     return (
         <div className='h-screen relative'>
-            <Sidebar links={['hotels', 'managers']} />
+            <Sidebar links={['hôtels', 'managers']} />
             <Navbar />
             <div className='pl-80 pt-24 w-full h-full'>
                 <Outlet />

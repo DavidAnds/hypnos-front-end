@@ -33,7 +33,7 @@ export default function Login() {
                 if(res.data.role === 'admin'){
                     navigate('./adminHome/hotels')
                 } else {
-                    navigate('./managerHome')
+                    navigate('./managerHome/suites')
                 }
             });
     };

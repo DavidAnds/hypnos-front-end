@@ -57,7 +57,7 @@ export default function CreateManager() {
                         htmlFor='lastName'
                         className='text-2xl t-crimson t-bold'
                     >
-                        Nom
+                        Nom 
                     </label>
                     <input
                         type='texte'

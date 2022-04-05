@@ -20,7 +20,6 @@ export default function DeleteHotel() {
             })
             .then((res) => {
                 navigate('../hotels');
-                console.log(res.data);
             });
     };
 

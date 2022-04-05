@@ -9,7 +9,7 @@ export default function Navbar() {
 
 
     return (
-        <nav className='absolute top-0 inset-x-0 py-8 px-14 flex justify-center items center'>
+        <nav className='fixed top-0 inset-x-0 py-8 px-14 flex justify-center items center'>
             <Link to='/'>
                 <div className='w-48 border border-black border-4 px-4 py-2 bg-white'>
                     <img src={logo} alt='' />
