@@ -17,26 +17,20 @@ export default function CreateSuite() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        
-
-        const formData = new FormData()
-        formData.append('image', file)
-        formData.append('title', title)
-        formData.append('price', price)
-        formData.append('description', description)
-        formData.append('bookingLink', bookingLink)
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('title', title);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('bookingLink', bookingLink);
 
         axios
-            .post(
-                createUrl,
-                    formData,
-                {
-                    headers: {
-                        authorization: `Bearer ${currentUser.token}`
-                    },
-                }
-            )
-            .then((res) => {
+            .post(createUrl, formData, {
+                headers: {
+                    authorization: `Bearer ${currentUser.token}`,
+                },
+            })
+            .then(() => {
                 navigate('../suites');
             });
     };
@@ -97,10 +91,7 @@ export default function CreateSuite() {
                     />
                 </div>
                 <div className='mt-2 '>
-                    <label
-                        htmlFor='file'
-                        className='text-2xl t-crimson t-bold'
-                    >
+                    <label htmlFor='file' className='text-2xl t-crimson t-bold'>
                         Ajouter une image pour la suite
                     </label>
                     <input

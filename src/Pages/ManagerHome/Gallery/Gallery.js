@@ -5,16 +5,23 @@ import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const createUrl = 'http://localhost:8080/api/gallery/createOne';
+const getImageUrl = 'http://localhost:8080/api/gallery/getAll/';
+const deleteImageUrl = 'http://localhost:8080/api/gallery/deleteOne/';
 
 export default function Gallery() {
-    const {suiteId} = useParams()
+    const { suiteId } = useParams();
     const [description, setDescription] = useState('');
     const [file, setFile] = useState(null);
     const [toggle, setToggle] = useState(false);
+    const [images, setImages] = useState(null);
 
     const navigate = useNavigate();
 
     let { currentUser } = useContext(AuthContext);
+
+    const toggleForm = () => {
+        setToggle(!toggle);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,18 +37,62 @@ export default function Gallery() {
                     authorization: `Bearer ${currentUser.token}`,
                 },
             })
-            .then((res) => {
-                toggleForm()
-                console.log(toggle);
+            .then(() => {
+                toggleForm();
+                window.location.reload(false);
             });
     };
 
-    const toggleForm = () => {
-        setToggle(!toggle);
+    const handleDelete = (imageId) => {
+        axios
+            .delete(deleteImageUrl + imageId, {
+                headers: {
+                    authorization: `Bearer ${currentUser.token}`,
+                },
+            })
+            .then(() => {
+                window.location.reload(false);
+            });
     };
 
+    useEffect(() => {
+        axios.get(getImageUrl + suiteId).then((res) => {
+            setImages(res.data);
+        });
+    }, []);
+
     return (
-        <div >
+        <div className='w-full h-full'>
+            <h2 className='text-5xl ml-20 t-josefin'>La gallery</h2>
+
+            <div className='grid justify-center gap-8 mx-8 max-w-screen-xl mt-6 sm:grid-cols-2  lg:grid-cols-3 xl:px-2'>
+                {!images
+                    ? 'null'
+                    : images.map((image) => {
+                          return (
+                              <div
+                                  className='border border-black flex flex-col justify-between'
+                                  key={uuidv4()}
+                              >
+                                  <img
+                                      src={image.imageURL}
+                                      alt={image.description}
+                                  />
+                                  <div className='flex justify-between t-crimson h-30'>
+                                      <button
+                                          onClick={() => {
+                                              handleDelete(image.id);
+                                          }}
+                                          className='block w-full flex py-2 justify-center t-josefin  uppercase t-josefin bg-red-500 text-white hover:bg-white hover:text-red-500 hover:border hover:border-red-500'
+                                      >
+                                          Supprimer
+                                      </button>
+                                  </div>
+                              </div>
+                          );
+                      })}
+            </div>
+
             <button
                 onClick={toggleForm}
                 className='block py-2 w-1/3 flex justify-center t-josefin mb-4 uppercase t-josefin bg-gold text-white ml-20 mt-10 hover:bg-white hover:text-black hover:border hover:border-black '
@@ -49,7 +100,12 @@ export default function Gallery() {
                 Ajouter une image
             </button>
 
-            <form className='w-96 ml-24 border border-black p-4' onSubmit={handleSubmit}>
+            <form
+                className={
+                    toggle ? 'w-96 ml-24 border border-black p-4' : 'hidden'
+                }
+                onSubmit={handleSubmit}
+            >
                 <div className='mt-2 '>
                     <label htmlFor='file' className='text-2xl t-crimson t-bold'>
                         Ajouter une image pour la suite

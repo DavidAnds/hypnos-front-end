@@ -34,7 +34,7 @@ export default function Login() {
                     navigate('./adminHome/hotels')
                 } else {
                     navigate('./managerHome/suites')
-                }
+                } 
             });
     };
     return (
@@ -43,7 +43,7 @@ export default function Login() {
                  'border-solid border-2 border-black w-1/3 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 '
         >
             <div className='bg-black text-white text-xl t-josefin '>
-                <h2 className='py-4 px-6 t-josefin'>Back office</h2>
+                <h2 className='py-4 px-6 t-josefin'>Connexion</h2>
             </div>
             <form className='form-auth t-josefin px-8' onSubmit={handleSubmit}>
                 <div className='mt-10 '>
@@ -72,7 +72,7 @@ export default function Login() {
                         className='border-solid border-2 border-gray-600 block w-full py-2 px-2 mt-1'
                     />
                 </div>
-                <button className='block px-4 py-2 t-josefin uppercase bg-black text-white mt-10 mb-4 ml-auto mr-4 hover:bg-white hover:text-black  '>
+                <button className='block px-4 py-2 t-josefin uppercase bg-black text-white mt-10 mb-4 ml-auto mr-4 hover:bg-white hover:text-black hover:border hover:border-black'>
                     Se connecter
                 </button>
                 <div>{error}</div>

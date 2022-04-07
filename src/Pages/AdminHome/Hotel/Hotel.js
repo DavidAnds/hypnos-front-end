@@ -15,26 +15,34 @@ export default function Hotel() {
     const [adress, setAdress] = useState('');
     const [city, setCity] = useState('');
     const [description, setDescription] = useState('');
+    const [imageDescription, setImageDescription] = useState();
+    const [file, setFile] = useState(null);
+
 
     useEffect(() => {
         setName(location.state.name)
         setAdress(location.state.adress)
         setCity(location.state.city)
         setDescription(location.state.description)
+        setImageDescription(location.state.imageDescription)
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('adress', adress);
+        formData.append('city', city);
+        formData.append('description', description);
+        formData.append('name', name);
+        formData.append('imageDescription', imageDescription);
+
+
         axios
             .put(
                 modifyUrl + id,
-                {
-                    name,
-                    adress,
-                    city,
-                    description,
-                },
+                formData,
                 {
                     headers: {
                         authorization: `Bearer ${currentUser.token}`,
@@ -112,7 +120,36 @@ export default function Hotel() {
                         className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
                     />
                 </div>
-                <button className='block px-20 py-3 text-lg t-josefin uppercase bg-gold text-white ml-auto mr-20 mt-8 hover:bg-white hover:text-black hover:border hover:border-black'>
+                <div className='mt-2 '>
+                    <label htmlFor='file' className='text-2xl t-crimson t-bold'>
+                        Ajouter une image pour la suite
+                    </label>
+                    <input
+                        type='file'
+                        id='file'
+                        onChange={(e) => {
+                            setFile(e.target.files[0]);
+                        }}
+                        className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
+                    />
+                </div>
+                <div className='mt-2 '>
+                    <label
+                        htmlFor='description'
+                        className='text-2xl t-crimson t-bold'
+                    >
+                        Description de l'image
+                    </label>
+                    <textarea
+                        id='description'
+                        value={imageDescription}
+                        onChange={(e) => {
+                            setImageDescription(e.target.value);
+                        }}
+                        className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
+                    />
+                </div>
+                <button className='block px-20 py-3 text-lg t-josefin uppercase bg-gold text-white ml-auto mr-20 mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black'>
                     Modifier
                 </button>
             </form>

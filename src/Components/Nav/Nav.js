@@ -11,7 +11,7 @@ export default function Nav() {
         setToggleNav(!toggleNav)
     }
   return (
-    <div className='fixed top-0 right-0 left-0 bg-white py-2 px-4 flex justify-between lg:px-10 xl:px-40'>
+    <div className='border-b fixed top-0 right-0 left-0 z-50 bg-white py-2 px-4 flex justify-between lg:px-10 xl:px-40'>
         <Link to='/' className='w-28'>
             <img src={logo} alt="Logo d'hypnos" />
         </Link>
@@ -22,21 +22,19 @@ export default function Nav() {
             </button>
         </div>
 
-        <nav className={toggleNav? 'fixed top-12 right-0 left-0 md:hidden': 'fixed -top-96 right-0 left-0 md:hidden'}>
+        <nav className={toggleNav? 'fixed top-12 right-0 left-0 transition transform translate-y-0 md:hidden': 'fixed top-12 transform -translate-y-52 right-0 left-0 transition md:hidden'}>
             <ul className='flex flex-col bg-white'>
-                <li className='block py-1 t-crimson text-center text-xl w-full border-b hover:bg-gray-200'>David</li>
-                <li className='block py-1 t-crimson text-center text-xl w-full border-b hover:bg-gray-200'>Roberta</li>
-                <li className='block py-1 t-crimson text-center text-xl w-full border-b hover:bg-gray-200'>Jean lui</li>
-                <li className='block py-1 t-crimson text-center text-xl w-full border-b hover:bg-gray-200'>Marge</li>
+                <Link to='/' className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'>Home</Link>
+                <Link to='/hotel' className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'>Hotel</Link>
+                <Link to='/' className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'>Connexion</Link>
             </ul>
         </nav>
 
         <nav className= 'md:block hidden'>
             <ul className='flex bg-white'>
-                <li className='block py-1 mx-4 t-crimson text-center text-xl hover:underline hover: underline-offset-8 '>David</li>
-                <li className='block py-1 mx-4 t-crimson text-center text-xl hover:underline hover:underline-offset-8'>Roberta</li>
-                <li className='block py-1 mx-4 t-crimson text-center text-xl hover:underline hover:underline-offset-8'>Jean lui</li>
-                <li className='block py-1 mx-4 t-crimson text-center text-xl hover:underline hover:underline-offset-8'>Marge</li>
+                <Link to='/' className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8 '>Home</Link>
+                <Link to='/hotel' className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'>Hotel</Link>
+                <Link to='/connexion' className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'>Connexion</Link>
             </ul>
         </nav>
 

@@ -24,6 +24,8 @@ import Gallery from './Pages/ManagerHome/Gallery/Gallery';
 
 import Home from './Pages/Home/Home';
 import DisplayHotel from './Pages/DisplayHotel/DisplayHotel';
+import DisplaySuite from './Pages/DisplaySuite/DisplaySuite';
+import UserPage from './Pages/UserPage/UserPage';
 
 function App() {
     return (
@@ -32,6 +34,9 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/:HotelName' element={<DisplayHotel />} />
+                    <Route path='/:HotelName/:suiteId' element={<DisplaySuite />} />
+                    <Route path='/connexion' element={<UserPage />} />
+
                     <Route path='/backOffice' element={<BackOffice />} />
                     <Route path='/backOffice/adminHome' element={<AdminHome />}>
                         <Route path='/backOffice/adminHome/managers' element={<Managers />} />

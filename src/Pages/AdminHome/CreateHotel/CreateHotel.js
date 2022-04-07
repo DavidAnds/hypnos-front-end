@@ -13,27 +13,28 @@ export default function CreateHotel() {
     const [adress, setAdress] = useState();
     const [city, setCity] = useState();
     const [description, setDescription] = useState();
+    const [imageDescription, setImageDescription] = useState();
+    const [file, setFile] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('adress', adress);
+        formData.append('city', city);
+        formData.append('description', description);
+        formData.append('name', name);
+        formData.append('imageDescription', imageDescription);
+
         axios
-            .post(
-                createUrl,
-                {
-                    name,
-                    adress,
-                    city,
-                    description,
+            .post(createUrl, formData, {
+                headers: {
+                    authorization: `Bearer ${currentUser.token}`,
                 },
-                {
-                    headers: {
-                        authorization: `Bearer ${currentUser.token}`,
-                    },
-                }
-            )
+            })
             .then((res) => {
-                navigate('../hotels');
+               navigate('../hotels')
             });
     };
 
@@ -56,7 +57,7 @@ export default function CreateHotel() {
                 </div>
                 <div className='mt-2 '>
                     <label htmlFor='city' className='text-2xl t-crimson t-bold'>
-                        City
+                        Ville
                     </label>
                     <input
                         type='texte'
@@ -72,7 +73,7 @@ export default function CreateHotel() {
                         htmlFor='adress'
                         className='text-2xl t-crimson t-bold'
                     >
-                        Adress
+                        Adresse
                     </label>
                     <input
                         type='texte'
@@ -94,6 +95,35 @@ export default function CreateHotel() {
                         id='description'
                         onChange={(e) => {
                             setDescription(e.target.value);
+                        }}
+                        className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
+                    />
+                </div>
+                <div className='mt-2 '>
+                    <label htmlFor='file' className='text-2xl t-crimson t-bold'>
+                        Ajouter une image pour la suite
+                    </label>
+                    <input
+                        type='file'
+                        id='file'
+                        onChange={(e) => {
+                            setFile(e.target.files[0]);
+                        }}
+                        required
+                        className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
+                    />
+                </div>
+                <div className='mt-2 '>
+                    <label
+                        htmlFor='description'
+                        className='text-2xl t-crimson t-bold'
+                    >
+                        Description de l'image
+                    </label>
+                    <textarea
+                        id='description'
+                        onChange={(e) => {
+                            setImageDescription(e.target.value);
                         }}
                         className='border-solid border-2 border-gray-600 block w-full py-1 px-2 mt-1'
                     />

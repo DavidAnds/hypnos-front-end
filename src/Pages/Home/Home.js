@@ -1,6 +1,8 @@
 import React from 'react';
 import Nav from '../../Components/Nav/Nav';
+import Footer from '../../Components/Footer/Footer';
 import background from './home-background.jpg';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     return (
@@ -30,10 +32,10 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className=' grid justify-center gap-8 mx-4 md:grid-cols-2 lg:mx-20 xl:mx-auto xl:mx-4 xl:grid-cols-3 max-w-screen-xl mt-6'>
-                    <div className='bg-white shadow-xl py-4 mx- max-w-xl md:mx-auto '>
+                <div className='grid justify-center max-w-screen-xl mt-6 gap-8 mx-4 md:grid-cols-2 lg:mx-20 xl:mx-auto xl:grid-cols-3'>
+                    <div className='bg-white shadow-xl py-4 mx- max-w-xl md:mx-auto'>
                         <div className='mx-4 rounded '>
-                            <img src={background} alt='image' />
+                            <img src={background} alt='image'/>
                         </div>
 
                         <div className='mt-4 px-4 t-crimson text-center flex flex-col items-center'>
@@ -52,16 +54,17 @@ export default function Home() {
                                 adresse de l'hotel, ville
                             </p>
 
-                            <a
-                                href='#'
-                                className='inline-block px-2 py-3 text-sm t-josefin uppercase bg-gold text-white mt-6 mb-2 justify-self-end hover:bg-white hover:text-black hover:border hover:border-black'
+                            <Link
+                                to='/hotel'
+                                className='inline-block px-2 py-3 text-sm t-josefin uppercase bg-gold text-white mt-6 mb-2 justify-self-end transition hover:bg-white hover:text-black hover:border hover:border-black'
                             >
                                 Découvrir les suites
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }
