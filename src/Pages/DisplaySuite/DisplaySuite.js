@@ -1,31 +1,89 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import Nav from '../../Components/Nav/Nav';
 import Footer from '../../Components/Footer/Footer';
 import Reservation from '../../Components/Reservation/Reservation';
-import home from './home-background.jpg';
+const getImageUrl = 'http://localhost:8080/api/gallery/getAll/';
 
 export default function DisplaySuite() {
+    const [suite, setSuite] = useState({});
+    const [images, setImages] = useState();
+    const [imageIndex, setImageIndex] = useState(0);
+
+    const location = useLocation();
     const { currentUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const goToSignup = () => {
+        navigate('/connexion');
+    };
+
+    useEffect(() => {
+        axios.get(getImageUrl + location.state.id).then((res) => {
+            setImages(res.data);
+        });
+
+        setSuite(location.state);
+    }, []);
+
+    const plusOneIndex = () => {
+        if (imageIndex >= images.length - 1) {
+            setImageIndex(0);
+        } else {
+            setImageIndex(imageIndex + 1);
+        }
+        console.log(imageIndex);
+    };
+
+    const minusOneIndex = () => {
+        if (imageIndex <= 0) {
+            setImageIndex(images.length - 1);
+        } else {
+            setImageIndex(imageIndex - 1);
+        }
+    };
 
     return (
-        <div>
+        <div className='min-h-screen'>
             <Nav />
-            <div className='pt-14 max-w-screen-xl mx-auto md:grid md:grid-cols-5 md:pt-12 lg:pb-14 '>
-                <div className='md:col-span-3 md:flex md:flex-col-reverse'>
-                    <div className='lg:mb-8 lg:w-3/4 lg:mx-auto '>
+            <div className='pt-14 max-w-screen-xl mx-auto md:grid md:grid-cols-5 md:pt-12 lg:pb-4 '>
+                <div className='md:col-span-3 md:flex md:flex-col-reverse md:justify-center'>
+                    <div className='relative lg:mb-8 lg:w-3/4 lg:mx-auto '>
+                        <div className='absolute w-4/5 flex justify-between top-2/4 left-1/2 transform -translate-x-1/2'>
+                            <button
+                                onClick={minusOneIndex}
+                                className='py-2 px-2 text-xl border border-black block rounded-xl hover:bg-gray-100'
+                            >
+                                {'<'}{' '}
+                            </button>
+                            <button
+                                onClick={plusOneIndex}
+                                className='py-2 px-2 text-xl border border-black block rounded-xl hover:bg-gray-100'
+                            >
+                                {'>'}
+                            </button>
+                        </div>
                         <img
-                            src={home}
-                            alt=''
+                            src={
+                                !images
+                                    ? suite.imageURL
+                                    : images[imageIndex].imageURL
+                            }
+                            alt={suite.title}
                             className='w-full object-cover md:max-h-80 md:max-h-screen'
                         />
                     </div>
                     <div className='px-2 py-4 md:px-8 md:flex items-center justify-between'>
                         <h1 className='t-josefin text-2xl t-gold sm:text-2xl'>
-                            Nom Suites
+                            {suite.title}
                         </h1>
                         <p className='t-crimson ml-2 text-gray-900'>
-                            Adresse hotel, ville
+                            <span className='t-bold text-gray-900 tracking-widest mr-1'>
+                                {suite.price}€
+                            </span>
+                            / nuit
                         </p>
                     </div>
                 </div>
@@ -35,18 +93,17 @@ export default function DisplaySuite() {
                         En savoir plus
                     </h3>
                     <p className='t-crimson text-justify px-2 mt-2'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Dolores, hic. Dolorem id similique voluptatum doloribus
-                        cum tempora aliquam magnam incidunt quidem beatae,
-                        facere, voluptatem voluptatibus dignissimos ea nisi
-                        totam laudantium dolore maiores, magni ullam? Quibusdam
-                        ducimus, sequi, maiores neque quo provident atque,
-                        temporibus impedit ipsa earum accusantium facere quod
-                        qui.
+                        {suite.description}
+                        {suite.description}
                     </p>
 
                     <div className='text-center mt-4'>
-                        <a href='#' className=' text-sm italic tracking-widest text-gray-700 t-josefin hover:text-blue-800'>Lien booking</a>
+                        <a
+                            href='#'
+                            className=' text-sm italic tracking-widest text-gray-700 t-josefin hover:text-blue-800'
+                        >
+                            {suite.bookingLink}
+                        </a>
                     </div>
                 </div>
 
@@ -56,9 +113,11 @@ export default function DisplaySuite() {
                     </h3>
 
                     <div className='md:h-5/6'>
-                        {!currentUser ? (
-                            <div className='bg-gray-400 bg-opacity-25 h-40 w-full flex items-center justify-center mt-4 hover:text-blue-800 cursor-pointer md:h-full'>
-                                <button className='t-crimson text-xl'>
+                        {currentUser ? (
+                            <div onClick={goToSignup} className='bg-gray-400 bg-opacity-25 h-40 w-full flex items-center justify-center mt-4 hover:text-blue-800 cursor-pointer md:h-full'>
+                                <button
+                                    className='t-crimson text-xl'
+                                >
                                     Pour reserver, connectez vous!
                                 </button>
                             </div>

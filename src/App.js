@@ -26,6 +26,7 @@ import Home from './Pages/Home/Home';
 import DisplayHotel from './Pages/DisplayHotel/DisplayHotel';
 import DisplaySuite from './Pages/DisplaySuite/DisplaySuite';
 import UserPage from './Pages/UserPage/UserPage';
+import ReservationPage from './Pages/ReservationPage/ReservationPage';
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/:HotelName' element={<DisplayHotel />} />
                     <Route path='/:HotelName/:suiteId' element={<DisplaySuite />} />
+                    <Route path='/reservation' element={<ReservationPage/>} />
                     <Route path='/connexion' element={<UserPage />} />
 
                     <Route path='/backOffice' element={<BackOffice />} />

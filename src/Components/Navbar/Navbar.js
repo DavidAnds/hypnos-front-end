@@ -9,20 +9,20 @@ export default function Navbar() {
 
 
     return (
-        <nav className='fixed top-0 inset-x-0 py-8 px-14 flex justify-center items center'>
+        <nav className='fixed top-0 inset-x-0 py-2 px-2 flex justify-center items center sm:px-8 sm:py-4 xl:px-16'>
             <Link to='/'>
-                <div className='w-48 border border-black border-4 px-4 py-2 bg-white'>
+                <div className='w-28 border border-black border-4 px-1 py-1 bg-white sm:w-32 sm:px-2 sm:py-2 xl:w-40 xl:px-4 '>
                     <img src={logo} alt='' />
                 </div>
             </Link>
 
             <div className='ml-auto flex items-center '>
                 {currentUser ? (
-                    <p className='t-crimson text-xl'>Hypnos {currentUser.role}</p>
+                    <p className='t-crimson sm:text-xl'>Hypnos {currentUser.role}</p>
                 ) : (
                     <div>
                         <button
-                            className='mr-4 t-crimson text-xl underline underline-offset-8'
+                            className='mr-4 t-crimson underline underline-offset-8 sm:text-xl'
                         >
                             Connexion
                         </button>
