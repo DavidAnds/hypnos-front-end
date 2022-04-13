@@ -4,8 +4,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-const modifyUrl = 'http://localhost:8080/api/back/user/updateInfo/';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getAll';
+const modifyUrl = '/api/back/user/updateInfo/';
+const getHotelUrl = '/api/hotel/getAll';
 
 export default function Manager() {
     const { id } = useParams();

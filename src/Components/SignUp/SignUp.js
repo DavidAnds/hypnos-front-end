@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-const signupUrl = 'http://localhost:8080/api/user/signup';
+const signupUrl = '/api/user/signup';
 
 export default function SignUp(props) {
     const [error, setError] = useState('');

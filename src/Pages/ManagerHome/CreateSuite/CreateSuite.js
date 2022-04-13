@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthContext';
-const createUrl = 'http://localhost:8080/api/suite/createOne';
+const createUrl = '/api/suite/createOne';
 
 export default function CreateSuite() {
     const { currentUser } = useContext(AuthContext);

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
-const baseUrl = 'http://localhost:8080/api/user/login';
+const baseUrl = '/api/user/login';
 
 export default function Login() {
     const [error, setError] = useState('');

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { AuthContext } from '../../../Context/AuthContext';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-const modifyUrl = 'http://localhost:8080/api/suite/updateOne/';
+const modifyUrl = '/api/suite/updateOne/';
 
 export default function Suite() {
     const {id} = useParams()

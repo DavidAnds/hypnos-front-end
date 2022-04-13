@@ -4,7 +4,7 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const modifyUrl = 'http://localhost:8080/api/back/user/updatePassword/';
+const modifyUrl = '/api/back/user/updatePassword/';
 
 
 export default function MyPassword() {

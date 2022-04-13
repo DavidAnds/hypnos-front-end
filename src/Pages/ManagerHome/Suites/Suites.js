@@ -3,8 +3,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-const getSuitesUrl = 'http://localhost:8080/api/suite/getAll/';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getOne/';
+const getSuitesUrl = '/api/suite/getAll/';
+const getHotelUrl = '/api/hotel/getOne/';
 
 export default function Suites() {
     let { currentUser } = useContext(AuthContext);

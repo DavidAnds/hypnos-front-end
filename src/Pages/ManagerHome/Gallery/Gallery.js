@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const createUrl = 'http://localhost:8080/api/gallery/createOne';
-const getImageUrl = 'http://localhost:8080/api/gallery/getAll/';
-const deleteImageUrl = 'http://localhost:8080/api/gallery/deleteOne/';
+const createUrl = '/api/gallery/createOne';
+const getImageUrl = '/api/gallery/getAll/';
+const deleteImageUrl = '/api/gallery/deleteOne/';
 
 export default function Gallery() {
     const { suiteId } = useParams();

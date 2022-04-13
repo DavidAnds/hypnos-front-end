@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthContext';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-const deleteUrl = 'http://localhost:8080/api/suite/deleteOne/';
+const deleteUrl = '/api/suite/deleteOne/';
 
 export default function DeleteSuite() {
     const {id} = useParams()

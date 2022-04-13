@@ -5,7 +5,7 @@ import axios from 'axios';
 import Nav from '../../Components/Nav/Nav';
 import Footer from '../../Components/Footer/Footer';
 import Reservation from '../../Components/Reservation/Reservation';
-const getImageUrl = 'http://localhost:8080/api/gallery/getAll/';
+const getImageUrl = '/api/gallery/getAll/';
 
 export default function DisplaySuite() {
     const [suite, setSuite] = useState({});
@@ -113,7 +113,7 @@ export default function DisplaySuite() {
                     </h3>
 
                     <div className='md:h-5/6'>
-                        {currentUser ? (
+                        {!currentUser ? (
                             <div onClick={goToSignup} className='bg-gray-400 bg-opacity-25 h-40 w-full flex items-center justify-center mt-4 hover:text-blue-800 cursor-pointer md:h-full'>
                                 <button
                                     className='t-crimson text-xl'

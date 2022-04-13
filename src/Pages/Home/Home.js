@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Footer from '../../Components/Footer/Footer';
 import background from './home.jpg';
 import { Link } from 'react-router-dom';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getAll';
+const getHotelUrl = '/api/hotel/getAll';
 
 export default function Home() {
     const [hotels, setHotels] = useState([]);

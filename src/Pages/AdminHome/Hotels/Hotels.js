@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate, Link } from 'react-router-dom';
-const baseUrl = 'http://localhost:8080/api/hotel/getAll';
+const baseUrl = '/api/hotel/getAll';
 
 export default function Hotels() {
 

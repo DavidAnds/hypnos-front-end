@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../Components/Footer/Footer';
 import Nav from '../../Components/Nav/Nav';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getAll';
-const getSuitesUrl = 'http://localhost:8080/api/suite/getAll/';
-const createReservationUrl = 'http://localhost:8080/api/reservation/createOne'
+const getHotelUrl = '/api/hotel/getAll';
+const getSuitesUrl = '/api/suite/getAll/';
+const getSuiteUrl = '/api/suite/getOne/'
+const getReservationUrl = '/api/reservation/getAll/';
+const createReservationUrl = '/api/reservation/createOne';
 
 export default function () {
     const { currentUser } = useContext(AuthContext);
@@ -16,9 +18,9 @@ export default function () {
     const [date, setDate] = useState(new Date());
     const [hotels, setHotels] = useState([]);
     const [suites, setSuites] = useState();
+    const [suitePrice, setSuitePrice] = useState('');
     const [hotelId, setHotelId] = useState('');
     const [suiteId, setSuiteId] = useState('');
-
 
     const goToSignup = () => {
         navigate('/connexion');
@@ -30,32 +32,41 @@ export default function () {
 
     const handleHotelChange = (value) => {
         axios.get(getSuitesUrl + value).then((res) => setSuites(res.data));
-    }; 
+    };
+
+    const handleSuiteChange = (value) => {
+        axios.get(getSuiteUrl + value).then((res) => setSuitePrice(res.data.price));
+
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const SQLEndDate = date[1].toLocaleString("en-US").split(', ')
-        const SQLStartDate = date[0].toLocaleString("en-US").split(', ')
+        e.preventDefault();
+        const SQLEndDate = date[1].toLocaleString('en-US').split(', ');
+        const SQLStartDate = date[0].toLocaleString('en-US').split(', ');
 
-        const startDate = SQLStartDate[0]
-        const endDate = SQLEndDate[0]
-
+        const startDate = SQLStartDate[0];
+        const endDate = SQLEndDate[0];
 
         axios
-        .post(createReservationUrl , {
-            startDate,
-            endDate,
-            suiteId,
-        }, {
-            headers: {
-                authorization: `Bearer ${currentUser.token}`,
-            },
-        })
-        .then(() => {
-            navigate('/')
-        });
+            .post(
+                createReservationUrl,
+                {
+                    startDate,
+                    endDate,
+                    suiteId,
+                },
+                {
+                    headers: {
+                        authorization: `Bearer ${currentUser.token}`,
+                    },
+                }
+            )
+            .then(() => {
+                navigate('/');
+            });
+    };
+
     
-    }
 
     return (
         <div>
@@ -72,14 +83,17 @@ export default function () {
                     {!currentUser ? (
                         <div
                             onClick={goToSignup}
-                            className='bg-gray-400 bg-opacity-25 h-40 w-full flex items-center justify-center mt-4 hover:text-blue-800 cursor-pointer md:h-full'
+                            className='bg-gray-400 bg-opacity-25 py-32 mb-10 w-full flex items-center justify-center mt-4 hover:text-blue-800 cursor-pointer md:py-60 xl:py-80'
                         >
                             <button className='t-crimson text-xl'>
                                 Pour reserver, connectez vous!
                             </button>
                         </div>
                     ) : (
-                        <form className='px-2 py-2' onSubmit={handleSubmit}>
+                        <form
+                            className='px-2 py-2 lg:flex lg:justify-between lg:w-3/4 lg:py-10 xl:pb-20'
+                            onSubmit={handleSubmit}
+                        >
                             <div className='mt-2 '>
                                 <p className='text-lg t-crimson t-bold mb-2'>
                                     Séléctionner un hôtel
@@ -107,7 +121,7 @@ export default function () {
                                           ))}
                                 </select>
                             </div>
-                            <div className='mt-2 '>
+                            <div className='mt-4 '>
                                 <p className='text-lg t-crimson t-bold mb-2'>
                                     Séléctionner une Suite
                                 </p>
@@ -116,7 +130,9 @@ export default function () {
                                     id='suiteId'
                                     value={suiteId}
                                     onChange={(e) => {
-                                       setSuiteId(e.target.value)
+                                        setSuiteId(e.target.value);
+
+                                        handleSuiteChange(e.target.value);
                                     }}
                                     required
                                 >
@@ -131,16 +147,27 @@ export default function () {
                                               </option>
                                           ))}
                                 </select>
+                                <p className='text-lg t-crimson t-bold mb-2 mt-4'>
+                                    Prix de la nuit:
+                                </p>
+                                <p className='text-xl t-josefin mb-2'>
+                                    {suiteId? `${suitePrice} €` : ''}
+                                </p>
+                                
                             </div>
-                            <div className='mt-2 mx-2'>
+                            <div className='mt-6 mx-2'>
                                 <p className='text-lg t-crimson t-bold mb-2'>
                                     Séléctionner la date de votre séjour.
                                 </p>
-                                <Calendar selectRange={true} value={date} onChange={setDate} />
+                                <Calendar
+                                    selectRange={true}
+                                    value={date}
+                                    onChange={setDate}
+                                />
+                                <button className='block px-4 py-2 t-josefin text-sm uppercase bg-gray-900 text-white mx-auto mt-4 hover:bg-white hover:text-black hover:border hover:border-black sm:mt-8'>
+                                    Réserver
+                                </button>
                             </div>
-                            <button className='block px-4 py-2 t-josefin text-sm uppercase bg-gray-900 text-white mx-auto mt-4 hover:bg-white hover:text-black hover:border hover:border-black sm:mt-8'>
-                                Réserver
-                            </button>
                         </form>
                     )}
                 </div>

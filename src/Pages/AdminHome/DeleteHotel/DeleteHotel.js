@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthContext';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-const deleteUrl = 'http://localhost:8080/api/hotel/deleteOne/';
+const deleteUrl = '/api/hotel/deleteOne/';
 
 export default function DeleteHotel() {
     const { id } = useParams();

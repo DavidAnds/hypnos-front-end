@@ -4,7 +4,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import { AuthContext } from '../../Context/AuthContext';
 import { Outlet } from 'react-router-dom';
-const baseUrl = 'http://localhost:8080/api/back/user/refresh';
+const baseUrl = '/back/user/refresh';
 
 
 export default function ManagerHome() {

@@ -4,8 +4,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const createUrl = 'http://localhost:8080/api/back/user/SignUp';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getAll';
+const createUrl = '/api/back/user/SignUp';
+const getHotelUrl = '/api/hotel/getAll';
 
 export default function CreateManager() {
     const navigate = useNavigate();

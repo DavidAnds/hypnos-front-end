@@ -4,8 +4,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const modifyUrl = 'http://localhost:8080/api/back/user/updateInfo/';
-const getUrl = 'http://localhost:8080/api/back/user/getOne/';
+const modifyUrl = '/api/back/user/updateInfo/';
+const getUrl = '/api/back/user/getOne/';
 
 export default function MyProfil() {
     const navigate = useNavigate();

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const createUrl = 'http://localhost:8080/api/hotel/createOne';
+const createUrl = '/api/hotel/createOne';
 
 export default function CreateHotel() {
     const navigate = useNavigate();

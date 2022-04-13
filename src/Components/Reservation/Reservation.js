@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Calendar from 'react-calendar';
-const getHotelUrl = 'http://localhost:8080/api/hotel/getAll';
-const getSuitesUrl = 'http://localhost:8080/api/suite/getAll/';
+const getHotelUrl = '/api/hotel/getAll';
+const getSuitesUrl = '/api/suite/getAll/';
 
 export default function Reservation() {
     const [date, setDate] = useState(new Date());

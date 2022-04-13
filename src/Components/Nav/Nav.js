@@ -58,7 +58,7 @@ export default function Nav() {
                             to='/reservation'
                             className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
                         >
-                            réservation
+                            Réservation
                         </Link>
                     {!currentUser ? (
                         <Link
@@ -86,7 +86,7 @@ export default function Nav() {
                         to='/reservation'
                         className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'
                     >
-                        réservation
+                        Réservation
                     </Link>
                     {!currentUser ? (
                         <Link

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 
-const baseUrl = 'http://localhost:8080/api/back/user/login';
+const baseUrl = '/back/user/login';
 
 export default function BackLogin() {
     const [error, setError] = useState('');

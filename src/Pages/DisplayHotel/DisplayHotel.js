@@ -5,7 +5,7 @@ import axios from 'axios';
 import Nav from '../../Components/Nav/Nav';
 import Footer from '../../Components/Footer/Footer';
 
-const getSuitesUrl = 'http://localhost:8080/api/suite/getAll/';
+const getSuitesUrl = '/api/suite/getAll/';
 
 export default function DisplayHotel() {
     const [hotel, setHotel] = useState({});
