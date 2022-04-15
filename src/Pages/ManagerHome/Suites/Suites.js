@@ -25,9 +25,9 @@ export default function Suites() {
 
     return (
         <div className='w-full h-full'>
-            <h2 className='text-5xl ml-20 t-josefin'>Les suites de <span className=''>{hotelName}</span></h2>
+            <h2 className='text-2xl t-josefin ml-10  xl:ml-20 xl:text-4xl'>Les suites de <span className=''>{hotelName}</span></h2>
 
-            <div className='grid grid-cols-8 px-2 mt-10'>
+            <div className='hidden grid-cols-8 px-2 mt-10 lg:grid'>
                 <div className=' flex justify-center'></div>
                 <div className=' flex justify-center'>
                     <h3 className='text-xl t-crimson t-bold'>Titre</h3>
@@ -48,49 +48,49 @@ export default function Suites() {
                 ? 'waiting for data'
                 : suites.map((suite) => (
                       <div
-                          className='grid grid-cols-8 px-2 mt-4'
+                          className='grid grid-cols-3 grid-rows-2  px-2 mt-8 sm:grid-rows-1 sm:grid-cols-6 lg:grid-cols-8'
                           key={uuidv4()}
                       >
-                          <div className=' flex justify-center'>
+                          <div className='row-span-2 flex justify-center sm:row-span-1'>
                               <img src={suite.imageURL} className='w-20 h-20'/>
                           </div>
-                          <div className=' flex justify-center items-center'>
+                          <div className=' col-span-2 flex justify-center items-center sm:col-span-1'>
                               <h3 className='t-crimson text-center'>
                                   {suite.title}
                               </h3>
                           </div>
-                          <div className=' flex justify-center items-center'>
+                          <div className=' hidden  justify-center items-center sm:flex'>
                               <h3 className='t-crimson text-center'>
                                   {suite.price}
                               </h3>
                           </div>
-                          <div className=' flex justify-center items-center'>
+                          <div className=' hidden  justify-center items-center sm:flex'>
                               <h3 className='t-crimson text-center'>
                                   {suite.bookingLink}
                               </h3>
                           </div>
-                          <div className=' flex justify-center items-center col-span-2'>
+                          <div className=' hidden  justify-center items-center col-span-2 lg:flex'>
                               <h3 className='t-crimson text-sm text-center'>
                                   {suite.description}
                               </h3>
                           </div>
-                          <div className='flex justify-around items-center col-span-2'>
+                          <div className='flex justify-center items-center col-span-2'>
                               <Link
                                   to={`./gallery/${suite.id}`}
-                                  className='block px-2 py-2 text-sm t-josefin uppercase bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black'
+                                  className='block px-2 py-2 text-sm t-josefin  bg-black text-white hover:bg-white hover:text-black hover:border hover:border-black'
                               >
-                                  gallerie
+                                  Gallerie
                               </Link>
                               <Link
                                   to={`./${suite.id}`}
                                   state={suite}
-                                  className='block px-2 py-2 text-sm t-josefin uppercase bg-gold text-white hover:bg-white hover:text-black hover:border hover:border-black'
+                                  className='block px-2 py-2 text-sm t-josefin  bg-gold text-white hover:bg-white hover:text-black hover:border hover:border-black'
                               >
                                   Modifier
                               </Link>
                               <Link
                                   to={`./delete/${suite.id}`}
-                                  className='block px-2 py-2 text-sm t-josefin uppercase bg-red-500 text-white  hover:bg-white hover:text-red-500 hover:border hover:border-red-500'
+                                  className='block px-2 py-2 text-sm t-josefin  bg-red-500 text-white  hover:bg-white hover:text-red-500 hover:border hover:border-red-500'
                               >
                                   Supprimer
                               </Link>
@@ -100,7 +100,7 @@ export default function Suites() {
 
             <Link
                 to='./create'
-                className='block py-2 w-1/3 flex justify-center t-josefin mb-10 uppercase t-josefin bg-gold text-white ml-20 mt-10 hover:bg-white hover:text-black hover:border hover:border-black '
+                className='block py-2 max-w-xs flex justify-center t-josefin text-sm uppercase t-josefin bg-gold text-white mx-10 mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black lg:py-4 lg:w-1/3 lg:ml-20'
             >
                 Créer une nouvelles suites
             </Link>

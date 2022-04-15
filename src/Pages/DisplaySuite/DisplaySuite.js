@@ -122,7 +122,7 @@ export default function DisplaySuite() {
                                 </button>
                             </div>
                         ) : (
-                            <Reservation />
+                            <Reservation suiteId={suite.id}/>
                         )}
                     </div>
                 </div>

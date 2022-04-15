@@ -28,7 +28,7 @@ export default function ManagerHome() {
         <div className='h-screen relative'>
             <Sidebar links={[, 'suites', 'mon Profil', 'mot De Passe']} />
             <Navbar />
-            <div className='pl-80 pt-24 w-full h-full'>
+            <div className='pt-20 w-full h-full xl:pl-60'>
                 <Outlet />
             </div>
         </div>

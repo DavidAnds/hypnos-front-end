@@ -7,7 +7,6 @@ export default function BackOffice() {
         <div className='h-screen relative'>
             <Navbar />
             <BackLogin/>
-
         </div>
     );
 }

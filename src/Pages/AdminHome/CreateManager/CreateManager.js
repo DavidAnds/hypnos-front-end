@@ -50,8 +50,8 @@ export default function CreateManager() {
 
     return (
         <div>
-            <h2 className='text-5xl ml-20'>Nouveau manager</h2>
-            <form className='px-16 mt-8' onSubmit={handleSubmit}>
+            <h2 className='text-3xl t-josefin ml-10  xl:ml-20 xl:text-5xl'>Nouveau manager</h2>
+            <form className='px-4 mt-8 lg:px-10 xl:px-20' onSubmit={handleSubmit}>
                 <div className='mt-2 '>
                     <label
                         htmlFor='lastName'
@@ -142,7 +142,7 @@ export default function CreateManager() {
                               ))}
                     </select>
                 </div>
-                <button className='block px-20 py-3 text-lg t-josefin uppercase bg-gold text-white ml-auto mr-20 mt-8 hover:bg-white hover:text-black hover:border hover:border-black'>
+                <button className='block py-2 px-4 max-w-xs flex justify-center t-josefin uppercase t-josefin bg-gold text-white mx-auto mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black lg:py-4 lg:w-1/3 lg:ml-auto lg:mr-20'>
                     Créer un nouveau manager
                 </button>
             </form>

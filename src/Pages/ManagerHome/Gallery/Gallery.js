@@ -93,16 +93,11 @@ export default function Gallery() {
                       })}
             </div>
 
-            <button
-                onClick={toggleForm}
-                className='block py-2 w-1/3 flex justify-center t-josefin mb-4 uppercase t-josefin bg-gold text-white ml-20 mt-10 hover:bg-white hover:text-black hover:border hover:border-black '
-            >
-                Ajouter une image
-            </button>
-
             <form
                 className={
-                    toggle ? 'w-96 ml-24 border border-black p-4' : 'hidden'
+                    toggle
+                        ? ' max-w-lg mx-2 mt-6 border border-black py-2 px-2 sm:mx-auto'
+                        : 'hidden'
                 }
                 onSubmit={handleSubmit}
             >
@@ -137,11 +132,18 @@ export default function Gallery() {
                     />
                 </div>
                 <div className='flex'>
-                    <button className='block px-4 py-3 text-sm mb-4 mt-2 t-josefin uppercase bg-gold text-white  hover:bg-white hover:text-black hover:border hover:border-black'>
+                    <button className='block py-2 px-2 max-w-xs flex justify-center t-josefin text-sm uppercase t-josefin bg-gold text-white mx-auto mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black lg:py-4 lg:w-1/3'>
                         Ajouter l'image
                     </button>
                 </div>
             </form>
+
+            <button
+                onClick={toggleForm}
+                className='block py-2 px-2 max-w-xs flex justify-center t-josefin text-sm uppercase t-josefin bg-gold text-white mx-auto mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black lg:py-4 lg:w-1/3 '
+            >
+                Ajouter une image
+            </button>
         </div>
     );
 }

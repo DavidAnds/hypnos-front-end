@@ -9,7 +9,6 @@ import Nav from '../../Components/Nav/Nav';
 const getHotelUrl = '/api/hotel/getAll';
 const getSuitesUrl = '/api/suite/getAll/';
 const getSuiteUrl = '/api/suite/getOne/'
-const getReservationUrl = '/api/reservation/getAll/';
 const createReservationUrl = '/api/reservation/createOne';
 
 export default function () {
@@ -41,11 +40,8 @@ export default function () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const SQLEndDate = date[1].toLocaleString('en-US').split(', ');
-        const SQLStartDate = date[0].toLocaleString('en-US').split(', ');
-
-        const startDate = SQLStartDate[0];
-        const endDate = SQLEndDate[0];
+        const startDate = date[0].toLocaleString('en-US')
+        const endDate = date[1].toLocaleString('en-US')
 
         axios
             .post(

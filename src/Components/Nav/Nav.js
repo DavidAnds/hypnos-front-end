@@ -10,19 +10,18 @@ export default function Nav() {
     const [toggleNav, setToggleNav] = useState(false);
 
     const { currentUser, logout } = useContext(AuthContext);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const toggleNavFunc = () => {
         setToggleNav(!toggleNav);
     };
 
-    const handleLogout =  () => {
-        logout()
-        localStorage.removeItem('token')
-        localStorage.removeItem('currentUser')
-        navigate('/connexion')
-
-    }
+    const handleLogout = () => {
+        logout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
+        navigate('/connexion');
+    };
 
     return (
         <div className='border-b fixed top-0 right-0 left-0 z-50 bg-white py-2 px-4 flex justify-between lg:px-10 xl:px-40'>
@@ -55,22 +54,36 @@ export default function Nav() {
                         Accueil
                     </Link>
                     <Link
-                            to='/reservation'
-                            className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
-                        >
-                            Réservation
-                        </Link>
-                    {!currentUser ? (
-                        <Link
-                        to='/connexion'
+                        to='/reservation'
                         className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
                     >
-                        Connexion
+                        Réservation
                     </Link>
+                    {!currentUser ? (
+                        ''
                     ) : (
-                        <button onClick={handleLogout} className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'>Déconnexion</button>
+                        <Link
+                            to='/myAccount'
+                            className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
+                        >
+                            Mon compte
+                        </Link>
                     )}
-
+                    {!currentUser ? (
+                        <Link
+                            to='/connexion'
+                            className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
+                        >
+                            Connexion
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={handleLogout}
+                            className='block py-1 t-crimson text-center text-xl w-full border-b transition hover:bg-gray-200'
+                        >
+                            Déconnexion
+                        </button>
+                    )}
                 </ul>
             </nav>
 
@@ -89,14 +102,29 @@ export default function Nav() {
                         Réservation
                     </Link>
                     {!currentUser ? (
-                        <Link
-                        to='/connexion'
-                        className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'
-                    >
-                        Connexion
-                    </Link>
+                        ''
                     ) : (
-                        <button onClick={handleLogout} className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'>Déconnexion</button>
+                        <Link
+                            to='/myAccount'
+                            className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'
+                        >
+                            Mon compte
+                        </Link>
+                    )}
+                    {!currentUser ? (
+                        <Link
+                            to='/connexion'
+                            className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'
+                        >
+                            Connexion
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={handleLogout}
+                            className='block py-1 mx-4 t-crimson text-center text-xl transition hover:underline hover:underline-offset-8'
+                        >
+                            Déconnexion
+                        </button>
                     )}
                 </ul>
             </nav>

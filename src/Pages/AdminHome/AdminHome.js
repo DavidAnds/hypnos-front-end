@@ -4,7 +4,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import { AuthContext } from '../../Context/AuthContext';
 import { Outlet } from 'react-router-dom';
-const baseUrl = 'http://localhost:8080/api/back/user/refresh';
+const baseUrl = '/api/back/user/refresh';
 
 export default function AdminHome() {
     const { currentUser, login } = useContext(AuthContext);
@@ -26,7 +26,7 @@ export default function AdminHome() {
         <div className='h-screen relative'>
             <Sidebar links={['hotels', 'managers']} />
             <Navbar />
-            <div className='pl-80 pt-24 w-full h-full'>
+            <div className='pt-20 w-full h-full xl:pl-60'>
                 <Outlet />
             </div>
         </div>

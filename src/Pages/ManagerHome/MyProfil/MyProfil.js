@@ -53,8 +53,8 @@ export default function MyProfil() {
 
     return (
         <div>
-            <h2 className='text-5xl ml-20'>Mon Profil</h2>
-            <form className='px-16 mt-8' onSubmit={handleSubmit}>
+            <h2 className='text-3xl t-josefin ml-10  xl:ml-20 xl:text-5xl'>Mon Profil</h2>
+            <form className='px-4 mt-8 lg:px-10 xl:px-20' onSubmit={handleSubmit}>
                 <div className='mt-2 '>
                     <label
                         htmlFor='lastName'
@@ -110,8 +110,7 @@ export default function MyProfil() {
                     />
                 </div>
                 <div className='flex justify-end'>
-                    <button className='block px-10 py-3 text-lg mr-8 t-josefin uppercase bg-gold text-white mt-8 hover:bg-white hover:text-black hover:border hover:border-black'>
-                        Modifier profil
+                <button className='block py-2 px-4 max-w-xs flex justify-center t-josefin uppercase t-josefin bg-gold text-white mx-auto mt-8 mb-8 hover:bg-white hover:text-black hover:border hover:border-black lg:py-4 lg:w-1/3 lg:ml-auto lg:mr-20'>                        Modifier profil
                     </button>
                 </div>
             </form>

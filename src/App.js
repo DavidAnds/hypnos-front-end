@@ -27,6 +27,7 @@ import DisplayHotel from './Pages/DisplayHotel/DisplayHotel';
 import DisplaySuite from './Pages/DisplaySuite/DisplaySuite';
 import UserPage from './Pages/UserPage/UserPage';
 import ReservationPage from './Pages/ReservationPage/ReservationPage';
+import MyAccount from './Pages/MyAccount/MyAccount';
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                     <Route path='/:HotelName/:suiteId' element={<DisplaySuite />} />
                     <Route path='/reservation' element={<ReservationPage/>} />
                     <Route path='/connexion' element={<UserPage />} />
+                    <Route path='/myAccount' element={<MyAccount />} />
 
                     <Route path='/backOffice' element={<BackOffice />} />
                     <Route path='/backOffice/adminHome' element={<AdminHome />}>
