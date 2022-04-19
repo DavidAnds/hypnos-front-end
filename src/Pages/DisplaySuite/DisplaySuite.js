@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Nav from '../../Components/Nav/Nav';
 import Footer from '../../Components/Footer/Footer';
@@ -98,12 +98,15 @@ export default function DisplaySuite() {
                     </p>
 
                     <div className='text-center mt-4'>
-                        <a
-                            href='#'
+                        <button
+                            
                             className=' text-sm italic tracking-widest text-gray-700 t-josefin hover:text-blue-800'
+                            onClick={() => {
+                                window.location.href = 'https://' + suite.bookingLink;
+                            }}
                         >
-                            {suite.bookingLink}
-                        </a>
+                            Lien booking
+                        </button>
                     </div>
                 </div>
 

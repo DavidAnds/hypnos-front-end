@@ -36,11 +36,17 @@ export default function MyAccount() {
     };
 
     const validate = () => {
-        axios.delete(deleteReservationUrl + reservationsToDelete).then(() => {
-            settoggleModal(!toggleModal);
-            setReservationsToDelete('');
-            setverify3Days(false);
-        });
+        axios
+            .delete(deleteReservationUrl + reservationsToDelete, {
+                headers: {
+                    authorization: `Bearer ${currentUser.token}`,
+                },
+            })
+            .then(() => {
+                settoggleModal(!toggleModal);
+                setReservationsToDelete('');
+                setverify3Days(false);
+            });
     };
 
     const cancel = () => {
@@ -52,7 +58,8 @@ export default function MyAccount() {
     return (
         <div className='relatif'>
             <Nav />
-            <div onClick={cancel}
+            <div
+                onClick={cancel}
                 className={
                     toggleModal
                         ? 'bg-gray-900 bg-opacity-25 absolute top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center'

@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import Calendar from 'react-calendar';
+import { isWithinInterval } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../../Components/Footer/Footer';
 import Nav from '../../Components/Nav/Nav';
 const getHotelUrl = '/api/hotel/getAll';
 const getSuitesUrl = '/api/suite/getAll/';
-const getSuiteUrl = '/api/suite/getOne/'
+const getSuiteUrl = '/api/suite/getOne/';
+const getReservationUrl = '/api/reservation/getAllFromSuite/';
 const createReservationUrl = '/api/reservation/createOne';
 
 export default function () {
@@ -20,6 +22,8 @@ export default function () {
     const [suitePrice, setSuitePrice] = useState('');
     const [hotelId, setHotelId] = useState('');
     const [suiteId, setSuiteId] = useState('');
+    const [disabledRanges, setDisabledRanges] = useState([]);
+    const [reservations, setReservations] = useState();
 
     const goToSignup = () => {
         navigate('/connexion');
@@ -29,19 +33,54 @@ export default function () {
         axios.get(getHotelUrl).then((res) => setHotels(res.data));
     }, []);
 
+    useEffect(() => {
+        if (reservations) {
+            let allRanges = [];
+            reservations.map((reservation) => {
+                const range = [
+                    new Date(reservation.startDate),
+                    new Date(reservation.endDate),
+                ];
+                allRanges.push(range);
+            });
+            setDisabledRanges(allRanges);
+        }
+    }, [reservations]);
+
     const handleHotelChange = (value) => {
         axios.get(getSuitesUrl + value).then((res) => setSuites(res.data));
     };
 
     const handleSuiteChange = (value) => {
-        axios.get(getSuiteUrl + value).then((res) => setSuitePrice(res.data.price));
+        axios
+            .get(getSuiteUrl + value)
+            .then((res) => setSuitePrice(res.data.price));
 
+        axios.get(getReservationUrl + value).then((res) => {
+            setReservations(res.data);
+        });
     };
+
+    function isWithinRange(date, range) {
+        return isWithinInterval(date, { start: range[0], end: range[1] });
+    }
+
+    function isWithinRanges(date, ranges) {
+        return ranges.some((range) => isWithinRange(date, range));
+    }
+
+    function tileDisabled({ date, view }) {
+        // Add class to tiles in month view only
+        if (view === 'month') {
+            // Check if a date React-Calendar wants to check is within any of the ranges
+            return isWithinRanges(date, disabledRanges);
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const startDate = date[0].toLocaleString('en-US')
-        const endDate = date[1].toLocaleString('en-US')
+        const startDate = date[0].toLocaleString('en-US');
+        const endDate = date[1].toLocaleString('en-US');
 
         axios
             .post(
@@ -61,8 +100,6 @@ export default function () {
                 navigate('/');
             });
     };
-
-    
 
     return (
         <div>
@@ -147,9 +184,8 @@ export default function () {
                                     Prix de la nuit:
                                 </p>
                                 <p className='text-xl t-josefin mb-2'>
-                                    {suiteId? `${suitePrice} €` : ''}
+                                    {suiteId ? `${suitePrice} €` : ''}
                                 </p>
-                                
                             </div>
                             <div className='mt-6 mx-2'>
                                 <p className='text-lg t-crimson t-bold mb-2'>
@@ -159,6 +195,9 @@ export default function () {
                                     selectRange={true}
                                     value={date}
                                     onChange={setDate}
+                                    className='mx-auto'
+                                    minDate={new Date()}
+                                    tileDisabled={tileDisabled}
                                 />
                                 <button className='block px-4 py-2 t-josefin text-sm uppercase bg-gray-900 text-white mx-auto mt-4 hover:bg-white hover:text-black hover:border hover:border-black sm:mt-8'>
                                     Réserver

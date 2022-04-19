@@ -3,18 +3,55 @@ import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
+import { isWithinInterval } from 'date-fns';
 const createReservationUrl = '/api/reservation/createOne';
+const getReservationUrl = '/api/reservation/getAllFromSuite/';
 
 export default function Reservation(props) {
     const { currentUser } = useContext(AuthContext);
     const [date, setDate] = useState(new Date());
-    const [suiteId, setSuiteId] = useState('');
+    const [disabledRanges, setDisabledRanges] = useState([]);
+    const [reservations, setReservations] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
-      setSuiteId(props.suiteId);
+        axios.get(getReservationUrl + props.suiteId).then((res) => {
+            setReservations(res.data);
+            console.log(res.data);
+        });
     }, [])
+
+    useEffect(() => {
+        if (reservations) {
+            let allRanges = [];
+            reservations.map((reservation) => {
+                const range = [
+                    new Date(reservation.startDate),
+                    new Date(reservation.endDate),
+                ];
+                allRanges.push(range);
+            });
+            setDisabledRanges(allRanges);
+        }
+    }, [reservations]);
     
+
+    function isWithinRange(date, range) {
+        return isWithinInterval(date, { start: range[0], end: range[1] });
+    }
+
+    function isWithinRanges(date, ranges) {
+        return ranges.some((range) => isWithinRange(date, range));
+    }
+
+    function tileDisabled({ date, view }) {
+        // Add class to tiles in month view only
+        if (view === 'month') {
+            // Check if a date React-Calendar wants to check is within any of the ranges
+            return isWithinRanges(date, disabledRanges);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -27,7 +64,7 @@ export default function Reservation(props) {
                 {
                     startDate,
                     endDate,
-                    suiteId,
+                    suiteId: props.suiteId,
                 },
                 {
                     headers: {
@@ -51,6 +88,8 @@ export default function Reservation(props) {
                     onChange={setDate}
                     className='mx-auto'
                     selectRange={true}
+                    minDate={new Date()}
+                    tileDisabled={tileDisabled}
                 />
             </div>
             <button className='block px-4 py-2 t-josefin text-sm uppercase bg-gray-900 text-white mx-auto mt-4 hover:bg-white hover:text-black hover:border hover:border-black sm:mt-8'>
