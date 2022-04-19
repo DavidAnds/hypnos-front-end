@@ -33,7 +33,7 @@ function App() {
     return (
         <>
             <AuthProvider>
-                <Routes>
+                <Routes >
                     <Route path='/' element={<Home />} />
                     <Route path='/:HotelName' element={<DisplayHotel />} />
                     <Route path='/:HotelName/:suiteId' element={<DisplaySuite />} />
